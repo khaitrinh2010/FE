@@ -10,8 +10,9 @@
 
 # production
 /build
-
-output.zip
+check.js
+controller.js
+server.js
 
 # misc
 .DS_Store
