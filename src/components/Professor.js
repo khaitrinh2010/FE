@@ -4,7 +4,6 @@ import Header from "./Header";
 const Professor = () => {
     return (
         <div className="min-h-screen text-white">
-            <Header/>
             <header
                 className="flex flex-col items-center p-8 bg-gradient-to-r from-blue-950 via-gray-800 to-gray-900 text-center rounded">
                 <img/>

@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
 import Header from "./Header";
+import {FaStar} from "react-icons/fa";
 const CoursePage = () => {
     const [activeTab, setActiveTab] = useState('Syllabus');
+    const [rating, setRating] = useState(0); // State to manage rating
+    const [hover, setHover] = useState(0); // State to manage hover effect on stars
+    const [feedback, setFeedback] = useState('')
+
+    const handleFeedbackChange = (event) => {
+        setFeedback(event.target.value)
+    }
+    const handleFeebackSubmit = () => {
+        setFeedback('')
+        setRating(0)
+    }
+    const handleSubmitStar = () => {
+        setRating(rating)
+    }
     const renderContent = () => {
         switch (activeTab) {
             case 'Syllabus':
@@ -54,7 +69,6 @@ const CoursePage = () => {
         <div className="min-h-screen text-gray-900">
 
             {/* Course Header */}
-            <Header/>
             <header className="bg-blue-600 text-white bg-gray-900 py-8 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-4xl font-bold mb-2">Introduction to React</h1>
@@ -97,6 +111,48 @@ const CoursePage = () => {
             {/* Content Section */}
             <main className="max-w-4xl mx-auto py-8 px-4">
                 {renderContent()}
+                {/*Rating and Feedback section*/}
+                <div className="mt-8">
+                    <h2 className="font-bold text-2xl mb-4">Rate this course</h2>
+                    <div className="flex items-center mb-4">
+                        {/*Create an array with 5 slots that can be iterated over*/}
+                        {[...Array(5)].map((star, index) => {
+                            let ratingValue = index + 1
+                            return (
+                                <label key={index}>
+                                    <input
+                                        type="range"
+                                        name="rating"
+                                        value={ratingValue}
+                                        className="hidden"
+                                        onClick={() => {
+                                            setRating(ratingValue)
+                                        }}>
+                                    </input>
+                                    <FaStar size={24} color={ratingValue <= (rating) ? "#ffc107" : "#e4e5e9"}
+                                            onClick={() => {rating > 1 ? setRating(ratingValue) : setRating(0)}}
+                                    ></FaStar>
+
+                                </label>
+                                // Radio buttons are a type of form element that allows users to select one option from a predefined set of options
+                            )
+                        })}
+                    </div>
+                    <h2 className="text-2xl font-bold mb-4"> Leave a comment for this course</h2>
+                    <textarea
+                        className="w-full p-2 border border-gray-300 rounded mb-4"
+                        rows="4"
+                        placeholder="Write your feedback here..."
+                        value={feedback}
+                        onChange={handleFeedbackChange}
+                    ></textarea>
+                    <button
+                        className="bg-gray-900 text-white px-4 py-2 rounded"
+                        onClick={handleFeebackSubmit}
+                    >
+                        Submit Feedback
+                    </button>
+                </div>
             </main>
         </div>
     );

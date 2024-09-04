@@ -10,24 +10,30 @@ import Profile from "./components/Profile";
 import Professor from "./components/Professor";
 import ProfilePage from "./components/Professor";
 import Course from "./components/Course";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import HomePage from "./components/HomePage";
 
 
 
 
 function App() {
   return (
-      <div>
-        {/*<Header/>*/}
-        {/*    <div className="App">*/}
-        {/*        <div className="flex justify-center">*/}
-        {/*            <HeroSection/>*/}
-        {/*            <Feature/>*/}
-        {/*        </div>*/}
+      <Router>
+          <div>
+              <Header/>
+              <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/professor" element={<Professor />} />
+                  <Route path="/course" element={<Course />} />
+                  {/* Add more routes as needed */}
+              </Routes>
+              <Footer/>
+          </div>
+      </Router>
 
-        {/*    </div>*/}
-        {/*<Footer/>*/}
-          <Course/>
-      </div>
   );
 }
 
